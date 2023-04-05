@@ -24,13 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $donation = Donation::orderby('updated_at','desc')->get();
-        return view('home',['donations'=>$donation]);
+        $donation = Donation::orderby('updated_at', 'desc')->get();
+        return view('home', ['donations' => $donation]);
     }
 
     public function adminHome()
     {
-        $donation = Donation::orderby('updated_at','desc')->get();
-        return view('admin.home',['donations'=>$donation]);
+        $donation = Donation::orderby('updated_at', 'desc')->get();
+        return view('admin.home', ['donations' => $donation]);
     }
 }

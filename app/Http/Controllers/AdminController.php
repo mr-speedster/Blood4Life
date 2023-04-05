@@ -31,7 +31,7 @@ class AdminController extends Controller
             'date_of_donation' => 'required',
             'quantity' => 'required',
         ]);
-        
+
         $donation = new Donation();
 
         $donation->donor_name = $request->donor_name;
@@ -70,7 +70,7 @@ class AdminController extends Controller
             'date_of_donation' => 'required',
             'quantity' => 'required',
         ]);
-        
+
         $donation = Donation::where('id', $id)->first();
 
         $donation->donor_name = $request->donor_name;
