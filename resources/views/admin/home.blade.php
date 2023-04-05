@@ -47,8 +47,8 @@
                         <td> {{$donation->date_of_donation}} </td>
                         <td> {{$donation->quantity}} </td>
                         <td>
-                            <a href="#"><i class="fas fa-pen text-dark"></i></a><br /><br />
-                            <a href="#"><i class="far fa-trash-alt text-danger"></i></a>
+                            <a href="{{ route('admin.edit', ['id'=>$donation->id]) }}"><i class="fas fa-pen text-dark"></i></a><br /><br />
+                            <a onclick="return confirm('Are you sure?')" href="{{ route('admin.delete', ['id'=>$donation->id]) }}"><i class="far fa-trash-alt text-danger"></i></a>
                         </td>
                     </tr>
                 @endforeach

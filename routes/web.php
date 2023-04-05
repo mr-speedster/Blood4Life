@@ -31,3 +31,12 @@ Route::get('admin/create', [AdminController::class, 'index'])
 
 Route::post('admin/create', [AdminController::class, 'create'])
         ->name("admin.create.data");
+
+Route::get('admin/edit/{id}', [AdminController::class, 'edit'])
+        ->name("admin.edit");
+
+Route::post('admin/edit/{id}', [AdminController::class, 'update'])
+        ->name("admin.edit.data");
+
+Route::get('admin/delete/{id}', [AdminController::class, 'destroy'])
+        ->name("admin.delete");

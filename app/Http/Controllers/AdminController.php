@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -44,28 +45,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -73,9 +52,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $donation = Donation::where('id', $id)->first();
+        return view('admin.update', ['donation' => $donation]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -85,7 +64,23 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'donor_name' => 'required|min:2|max:255',
+            'blood_group' => 'required',
+            'date_of_donation' => 'required',
+            'quantity' => 'required',
+        ]);
+        
+        $donation = Donation::where('id', $id)->first();
+
+        $donation->donor_name = $request->donor_name;
+        $donation->blood_group = $request->blood_group;
+        $donation->date_of_donation = $request->date_of_donation;
+        $donation->quantity = $request->quantity;
+
+        $donation->save();
+
+        return redirect()->route('admin.home');
     }
 
     /**
@@ -96,6 +91,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $donation = Donation::where('id', $id)->first();
+        $donation->delete();
+        return Redirect::back();
     }
 }
