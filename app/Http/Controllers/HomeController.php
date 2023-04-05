@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donation;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,11 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $donation = Donation::orderby('updated_at','desc')->get();
+        return view('home',['donations'=>$donation]);
     }
 
     public function adminHome()
     {
-        return view('admin.home');
+        $donation = Donation::orderby('updated_at','desc')->get();
+        return view('admin.home',['donations'=>$donation]);
     }
 }

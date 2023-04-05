@@ -11,7 +11,7 @@
         border-bottom: 1px solid #ddd;
     }
     .t-row:hover {
-        background-color: #f5f5f5;
+        background-color: #bff8fa;
     }
     @media screen and (max-width: 600px) {
         table {
@@ -24,6 +24,11 @@
 <div class="container">
     <h3 class="text-center">Blood Donation Admin Panel</h3>
     <div class="row">
+        <div class="col">
+            <a class="btn btn-info float-end" href="{{ route('admin.create') }}">ADD+</a>
+        </div>
+    </div>
+    <div class="row">
         <table>
             <thead class="text-light bg-dark">
                 <tr>
@@ -31,27 +36,22 @@
                     <th>Blood Group</th>
                     <th>Date of Donation</th>
                     <th>Quantity (in ml)</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="t-row">
-                    <td>John Doe</td>
-                    <td>O+</td>
-                    <td>2022-03-28</td>
-                    <td>500</td>
-                </tr>
-                <tr class="t-row">
-                    <td>Jane Smith</td>
-                    <td>A-</td>
-                    <td>2022-03-20</td>
-                    <td>250</td>
-                </tr>
-                <tr class="t-row">
-                    <td>Bob Johnson</td>
-                    <td>B+</td>
-                    <td>2022-03-15</td>
-                    <td>350</td>
-                </tr>
+                @foreach ($donations as $donation)
+                    <tr class="t-row">
+                        <td> {{$donation->donor_name}} </td>
+                        <td> {{$donation->blood_group}} </td>
+                        <td> {{$donation->date_of_donation}} </td>
+                        <td> {{$donation->quantity}} </td>
+                        <td>
+                            <a href="#"><i class="fas fa-pen text-dark"></i></a><br /><br />
+                            <a href="#"><i class="far fa-trash-alt text-danger"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

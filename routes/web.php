@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+Route::get('/home', [HomeController::class, 'index'])
         ->name('home');
 
-Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])
+/*Admin Routes*/
+
+Route::get('admin/home', [HomeController::class, 'adminHome'])
         ->name('admin.home')->middleware('Valid_admin');
+
+Route::get('admin/create', [AdminController::class, 'index'])
+        ->name('admin.create');
+
+Route::post('admin/create', [AdminController::class, 'create'])
+        ->name("admin.create.data");
